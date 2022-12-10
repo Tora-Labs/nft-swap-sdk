@@ -21,10 +21,19 @@
     "exchange": "0xf8becacec90bfc361c0a2c720839e08405a72f6d",
     "erc20Proxy": "0x070efeb7e5ffa3d1a59d03a219539551ae60ba43",
     "erc721Proxy": "0x7f10d80f2659aaae790ab03da12be11c4e6008c3",
-    "erc1155Proxy": "0xaa460127562482faa5df42f2c39a025cd4a1cc0a",
-    "multiAssetProxy": "0xb344afed348de15eb4a9e180205a2b0739628339",
+    "erc1155Proxy": "0xC13B6068eD4fb8f4dF7c410AF40F32d19305ded8",
+    "multiAssetProxy": "0xcD34bb27B3A87C5f198C3942333385d85A5E7f2C",
     "forwarder": "0x18571835c95a6d79b2f5c45b676ccd16f5fa34a1",
     "wrappedNativeToken": "0xc778417e063141139fce010982780140aa0cd5ab"
+  },
+  "5": {
+    "exchange": "0xE9a7FCBFf564BB4A1956dE70251E279b5f74720A",
+    "erc20Proxy": "0x1D4DF2B0d79fb7d4F7B659E886427b100D319d65",
+    "erc721Proxy": "0x25B7fAAAB1120C2cE74D0E35E5Cb40deA43f2268",
+    "erc1155Proxy": "0xC13B6068eD4fb8f4dF7c410AF40F32d19305ded8",
+    "multiAssetProxy": "0xcD34bb27B3A87C5f198C3942333385d85A5E7f2C",
+    "forwarder": "0x0000000000000000000000000000000000000000",
+    "wrappedNativeToken": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"
   },
   "42": {
     "exchange": "0xf1ec7d0ba42f15fb5c9e3adbe86431973e44764c",

@@ -204,8 +204,8 @@ class NftSwapV3 implements INftSwapV3 {
             if (throwIfStatusOtherThanFillableOrFilled) {
               throw new Error(
                 OrderStatusCodeLookup[orderInfo.orderStatus] ??
-                  orderInfo.orderStatus ??
-                  'Unknown status'
+                orderInfo.orderStatus ??
+                'Unknown status'
               );
             }
             return orderInfo;
@@ -484,6 +484,43 @@ class NftSwapV3 implements INftSwapV3 {
     }
 
     return _fillSignedOrder(signedOrder, exchangeContract, allTxOverrides);
+  };
+
+  public estimateFillOrder = async (
+    signedOrder: SignedOrder,
+    fillOverrides?: Partial<FillOrderOverrides>,
+  ) => {
+    const exchangeContract =
+      fillOverrides?.exchangeContract ?? this.exchangeContract;
+    let gasBufferMultiple: number | undefined = undefined;
+    if (fillOverrides?.gasAmountBufferMultiple === null) {
+      // keep gasBufferMultiple undefined, b/c user specifically specified null.
+      gasBufferMultiple = undefined;
+    } else {
+      gasBufferMultiple =
+        fillOverrides?.gasAmountBufferMultiple ??
+        this.getGasMultipleForChainId(this.chainId);
+    }
+    let maybeCustomGasLimit: BigNumberish | undefined;
+    if (gasBufferMultiple) {
+      const estimatedGasAmount = await _estimateGasForFillOrder(
+        signedOrder,
+        exchangeContract
+      );
+      // NOTE(johnrjj) - Underflow issues, so we convert to number. Gas amounts shouldn't overflow.
+      maybeCustomGasLimit = Math.floor(
+        estimatedGasAmount.toNumber() * gasBufferMultiple
+      );
+      return {
+        estimatedGas: maybeCustomGasLimit
+      }
+    } else {
+      return await _estimateGasForFillOrder(
+        signedOrder,
+        exchangeContract
+      );
+    }
+
   };
 
   private getGasMultipleForChainId = (chainId: number): number | undefined => {
